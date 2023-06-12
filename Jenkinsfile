@@ -29,14 +29,9 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to K8s'){
+         stage('Deploy to K8s'){
             steps{
-            script {
-                    def namespace = 'dev'
-                    def deploymentFile = 'deploymentservice.yaml'
-                    
-                    sh "kubectl create namespace ${dev}"
-                    sh "kubectl apply -f ${deploymentFile} -n ${dev}"
+                script{
                     kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'kubernetes')
                 }
             }
