@@ -18,6 +18,11 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
 
 
 ---
@@ -33,3 +38,14 @@ spec:
     - nodePort: 30163
       port: 8080 
       targetPort: 8080
+
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-de
