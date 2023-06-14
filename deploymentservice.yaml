@@ -40,12 +40,15 @@ spec:
       targetPort: 8080
 
 ---
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: my-hpa
+  name: hpa-multistage
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: my-de
+    name: multistage
+  minReplicas: 1
+  maxReplicas: 8
+  targetCPUUtilizationPercentage: 50
