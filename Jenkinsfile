@@ -42,9 +42,8 @@ pipeline {
                 script {
                     kubernetesScale(name: 'my-deployment', replicas: 8)
                     sh 'kubectl autoscale deployment my-deployment --cpu-percent=80 --min=2 --max=5 --namespace=my-namespace --name=my-hpa'
-                    }
                 }
             }
-        }    
-    }
+        }
+    }    
 }
