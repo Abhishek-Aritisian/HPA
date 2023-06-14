@@ -11,8 +11,8 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-    )
-        stage('Build docker image'){
+    }
+    stage('Build docker image'){
             steps{
                 script{
                     sh 'docker build -t abhishekp006/kubernetes:$BUILD_NUMBER .'
